@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Caret · Cursor 开机动画 Demo</title>
+  <link rel="stylesheet" href="./demo.css">
+</head>
+<body data-wb-theme="dark">
+  <!-- 示意用的 Cursor 工作台：开机动画盖住它的拼装过程，最后把立方体和光标交还给它 -->
+  <div class="wb" id="wb">
+    <header class="part wb-title" data-at="1">
+      <div class="wb-title-l" data-at="2">
+        <svg class="window-appicon" viewBox="-8 -8 16 16" aria-hidden="true">
+          <path d="M0 -7.2 L6.24 -3.6 L6.24 3.6 L0 7.2 L-6.24 3.6 L-6.24 -3.6 Z M0 0 L-6.24 -3.6 M0 0 L6.24 -3.6 M0 0 L0 7.2" />
+        </svg>
+        <nav class="wb-menu"><span>文件</span><span>编辑</span><span>选择</span><span>查看</span><span>转到</span><span>运行</span><span>终端</span><span>帮助</span></nav>
+      </div>
+      <div class="wb-title-c" data-at="2">开机动画 — Cursor</div>
+      <div></div>
+    </header>
+
+    <div class="wb-main">
+      <aside class="part wb-activity" data-at="1">
+        <div class="act-icons" data-at="3"><i class="on"></i><i></i><i></i><i></i></div>
+      </aside>
+
+      <aside class="part wb-side" data-at="1">
+        <div data-at="3">
+          <div class="side-head">资源管理器</div>
+          <div class="tree">
+            <div class="row dir">开机动画</div>
+            <div class="row dir l1">demo</div>
+            <div class="row l2 active"><b>JS</b>caret-boot.js</div>
+            <div class="row l2"><b>CSS</b>demo.css</div>
+            <div class="row l2"><b>JS</b>demo.js</div>
+            <div class="row l2"><b>&lt;&gt;</b>index.html</div>
+            <div class="row l1"><b>MD</b>产品需求.md</div>
+            <div class="row l1"><b>MD</b>产品架构.md</div>
+            <div class="row l1"><b>MD</b>目前进度.md</div>
+          </div>
+        </div>
+      </aside>
+
+      <main class="part wb-editor monaco-editor focused" data-at="1">
+        <div class="tabs" data-at="5">
+          <div class="tab on"><b>JS</b>caret-boot.js</div>
+          <div class="tab"><b>MD</b>产品需求.md</div>
+        </div>
+        <div class="crumbs" data-at="5">demo › caret-boot.js › mount</div>
+        <div class="code" data-at="5">
+          <div class="ln"><i>1</i><span class="cm">// 把开机动画挂到工作台上（Demo 里挂在这张网页上）</span></div>
+          <div class="ln"><i>2</i><span class="kw">const</span> <span class="pr">boot</span> <span class="pn">=</span> <span class="pr">CaretBoot</span><span class="pn">.</span><span class="fn">mount</span><span class="pn">({</span></div>
+          <div class="ln"><i>3</i>  <span class="pr">mode</span><span class="pn">:</span> <span class="pr">CaretBoot</span><span class="pn">.</span><span class="fn">resolveMode</span><span class="pn">(</span><span class="str">'smart'</span><span class="pn">,</span> <span class="pr">localStorage</span><span class="pn">).</span><span class="pr">mode</span><span class="pn">,</span></div>
+          <div class="ln"><i>4</i>  <span class="pr">style</span><span class="pn">:</span> <span class="str">'dark'</span><span class="pn">,</span></div>
+          <div class="ln cur"><i>5</i>  <span class="pr">workspace</span><span class="pn">:</span> <span class="str">'开机动画'</span><span class="pn">,</span><span class="cursors-layer"><span class="cursor"></span></span></div>
+          <div class="ln"><i>6</i><span class="pn">});</span></div>
+          <div class="ln"><i>7</i></div>
+          <div class="ln"><i>8</i><span class="cm">// 每个启动里程碑放行立方体的一条边</span></div>
+          <div class="ln"><i>9</i><span class="kw">new</span> <span class="fn">PerformanceObserver</span><span class="pn">((</span><span class="pr">list</span><span class="pn">)</span> <span class="kw">=&gt;</span> <span class="pn">{</span></div>
+          <div class="ln"><i>10</i>  <span class="kw">for</span> <span class="pn">(</span><span class="kw">const</span> <span class="pr">e</span> <span class="kw">of</span> <span class="pr">list</span><span class="pn">.</span><span class="fn">getEntries</span><span class="pn">())</span> <span class="pr">boot</span><span class="pn">.</span><span class="fn">mark</span><span class="pn">(</span><span class="pr">e</span><span class="pn">.</span><span class="pr">name</span><span class="pn">,</span> <span class="pr">e</span><span class="pn">.</span><span class="pr">startTime</span><span class="pn">);</span></div>
+          <div class="ln"><i>11</i><span class="pn">}).</span><span class="fn">observe</span><span class="pn">({</span> <span class="pr">type</span><span class="pn">:</span> <span class="str">'mark'</span><span class="pn">,</span> <span class="pr">buffered</span><span class="pn">:</span> <span class="kw">true</span> <span class="pn">});</span></div>
+        </div>
+      </main>
+
+      <aside class="part wb-agent" data-at="1">
+        <div class="agent" data-at="4">
+          <div class="agent-head">Agent<span>开机动画方案</span></div>
+          <div class="msg me">做一个 Cursor 的开机动画，不要跟 550C 一样</div>
+          <div class="msg">
+            先出方案和网页 Demo：光标接受一行 Tab 补全，分出三个 Agent 画立方体，最后落回你的编辑器。
+            <div class="sk"></div><div class="sk short"></div>
+          </div>
+          <div class="agent-input">继续追问，@ 引用文件…</div>
+        </div>
+      </aside>
+    </div>
+
+    <footer class="part wb-status" data-at="1">
+      <div class="sb" data-at="6"><span>main</span><span id="sbReady"></span></div>
+      <div class="sb" data-at="6"><span>行 5，列 24</span><span>UTF-8</span><span>JavaScript</span></div>
+    </footer>
+  </div>
+
+  <!-- 系统窗口按钮（Windows 的 Window Controls Overlay）永远浮在网页内容之上，动画也盖不住它 -->
+  <div class="winctl" aria-hidden="true">
+    <span><svg viewBox="0 0 10 10"><path d="M0 5h10" /></svg></span>
+    <span><svg viewBox="0 0 10 10"><rect x=".5" y=".5" width="9" height="9" /></svg></span>
+    <span><svg viewBox="0 0 10 10"><path d="M0 0l10 10M10 0L0 10" /></svg></span>
+  </div>
+
+  <aside class="dock" id="dock" aria-label="Demo 控制面板">
+    <div class="dock-head">
+      <div class="dock-title">CARET <em>开机动画 Demo</em></div>
+      <button class="ghost" data-act="hide" title="隐藏面板（H）">隐藏 <kbd>H</kbd></button>
+    </div>
+
+    <section>
+      <div class="lbl">档位</div>
+      <div class="seg" data-k="mode">
+        <button data-v="smart">智能</button><button data-v="story">完整</button><button data-v="brief">简易</button><button data-v="off">关闭</button>
+      </div>
+      <div class="note" id="modeNote"><span id="resolved"></span><button class="link" data-act="reset-smart" title="清除今天的播放记录，下次按第一次打开处理">重置</button></div>
+    </section>
+
+    <section>
+      <div class="lbl">风格</div>
+      <div class="seg" data-k="style">
+        <button data-v="dark">暗室</button><button data-v="paper">纸面</button><button data-v="draft">图纸</button>
+      </div>
+    </section>
+
+    <section>
+      <div class="lbl">模拟启动耗时</div>
+      <div class="seg" data-k="load">
+        <button data-v="fast">快 0.9s</button><button data-v="normal">常规 2.4s</button><button data-v="slow">慢 5.5s</button>
+      </div>
+    </section>
+
+    <section class="tl">
+      <div class="tl-row">
+        <button class="icon" id="btnPlay" data-act="play" title="播放 / 暂停（Space）">
+          <svg class="i-pause" viewBox="0 0 12 12"><rect x="2" y="1.5" width="2.6" height="9" rx=".6" /><rect x="7.4" y="1.5" width="2.6" height="9" rx=".6" /></svg>
+          <svg class="i-play" viewBox="0 0 12 12"><path d="M3 1.6v8.8L10.2 6z" /></svg>
+        </button>
+        <input id="scrub" type="range" min="0" max="1000" step="1" value="0" aria-label="时间轴">
+      </div>
+      <div class="tl-meta"><span id="phase">—</span><span id="time">0.00 / 0.00 s</span></div>
+      <div class="tl-actions">
+        <button data-act="replay">重播 <kbd>R</kbd></button>
+        <button data-act="skip">跳过 <kbd>Esc</kbd></button>
+        <button data-act="slow" id="btnSlow">慢放 0.35×</button>
+      </div>
+    </section>
+
+    <footer class="keys">Space 暂停 · ←/→ 逐帧（Shift 0.1s）· 点画面跳过</footer>
+  </aside>
+
+  <script src="./caret-boot.js"></script>
+  <script src="./demo.js"></script>
+</body>
+</html>
