@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Caret · Cursor 开机动画</title>
+  <style>
+    :root { --bg: #14120B; --fg: #EDECEC; --muted: rgba(237,236,236,.55); --line: rgba(237,236,236,.12); --accent: #F54E00; }
+    * { box-sizing: border-box; }
+    html, body { margin: 0; background: var(--bg); color: var(--fg); }
+    body { font: 15px/1.6 "Segoe UI", "Microsoft YaHei UI", "PingFang SC", sans-serif; -webkit-font-smoothing: antialiased; }
+    main { max-width: 760px; margin: 0 auto; padding: 72px 28px 96px; }
+    .mark { display: flex; align-items: center; gap: 14px; }
+    .mark svg { width: 28px; height: 32px; }
+    h1 { margin: 0; font: 600 28px/1 Bahnschrift, "DIN Alternate", "Segoe UI", sans-serif; letter-spacing: .16em; }
+    .lead { margin: 18px 0 0; max-width: 36em; color: var(--muted); }
+    h2 { margin: 56px 0 8px; font: 600 13px/1 Bahnschrift, "Segoe UI", sans-serif; letter-spacing: .18em; color: var(--muted); }
+    .note { margin: 0 0 8px; color: var(--muted); font-size: 13px; }
+    a.row {
+      display: grid; grid-template-columns: 72px 1fr auto; gap: 18px; align-items: baseline;
+      padding: 16px 0; border-top: 1px solid var(--line); color: inherit; text-decoration: none;
+    }
+    a.row:last-child { border-bottom: 1px solid var(--line); }
+    a.row:hover .name { color: var(--accent); }
+    .time { font: 13px/1 "Cascadia Code", Consolas, monospace; color: var(--muted); }
+    .name { font-size: 18px; }
+    .desc { grid-column: 2 / -1; margin: 0; color: var(--muted); font-size: 13.5px; }
+    footer { margin-top: 48px; color: var(--muted); font-size: 13px; }
+    footer a { color: var(--fg); }
+  </style>
+</head>
+<body>
+  <main>
+    <div class="mark">
+      <svg viewBox="-50 -58 100 116" aria-hidden="true">
+        <polygon points="0,-46 40,-23 0,0 -40,-23" fill="rgba(237,236,236,.16)"/>
+        <polygon points="-40,-23 0,0 0,46 -40,23" fill="rgba(237,236,236,.08)"/>
+        <polygon points="0,0 40,-23 40,23 0,46" fill="rgba(237,236,236,.05)"/>
+        <path d="M0-46 L40-23 L40 23 L0 46 L-40 23 L-40-23 Z M0 0 L-40-23 M0 0 L40-23 M0 0 L0 46" fill="none" stroke="#EDECEC" stroke-width="1.6" stroke-linejoin="round"/>
+      </svg>
+      <h1>CARET</h1>
+    </div>
+    <p class="lead">Cursor 的开机动画方案。五版短片大约四到五秒，各做一个动作；另外三稿更长，画面会跟着鼠标走。直接打开，不用安装。</p>
+
+    <h2>短片</h2>
+    <p class="note">空格暂停，Esc 跳过。落点那一版，鼠标在哪，立方体就落在哪。</p>
+    <a class="row" href="versions/index.html?v=shutter">
+      <span class="time">4.6s</span><span class="name">快门</span>
+      <p class="desc">两片快门合上再打开，里面已经是字标。</p>
+    </a>
+    <a class="row" href="versions/index.html?v=strike">
+      <span class="time">4.8s</span><span class="name">一击</span>
+      <p class="desc">三道光标从三个角汇到中心，撞出立方体。</p>
+    </a>
+    <a class="row" href="versions/index.html?v=word">
+      <span class="time">5.2s</span><span class="name">一个词</span>
+      <p class="desc">写下 cursor，补全出现，Tab 收下，整行收成字标。</p>
+    </a>
+    <a class="row" href="versions/index.html?v=drop">
+      <span class="time">4.8s</span><span class="name">落点</span>
+      <p class="desc">立方体落到光标所在的位置，停一下，再飞进窗口图标。</p>
+    </a>
+    <a class="row" href="versions/index.html?v=flip">
+      <span class="time">5.2s</span><span class="name">翻面</span>
+      <p class="desc">一张只有光标的卡片翻过来，背面是字标。</p>
+    </a>
+
+    <h2>习作</h2>
+    <p class="note">这三稿更慢，用来试方向。点击在每一稿里的含义不一样。</p>
+    <a class="row" href="demo/index.html">
+      <span class="time">7.8s</span><span class="name">光标补全</span>
+      <p class="desc">九道边线收成等轴立方体，旁白用 Tab 补全写完。</p>
+    </a>
+    <a class="row" href="demo-2/index.html">
+      <span class="time">9.6s</span><span class="name">光圈</span>
+      <p class="desc">鼠标是镜头。针阵跟着对焦，立方体跟着转。点击锁死光圈。</p>
+    </a>
+    <a class="row" href="demo-3/index.html">
+      <span class="time">10.4s</span><span class="name">坍缩</span>
+      <p class="desc">鼠标是引力井。词和碎片绕着转，落下之后只剩立方体。点击提前坍缩。</p>
+    </a>
+
+    <footer>
+      几何立方体是这组方案自己的标记，不是 Cursor 的官方标志。色值取自 cursor.com 公开配色：底色 #14120B，字色 #EDECEC，强调色 #F54E00。
+    </footer>
+  </main>
+</body>
+</html>

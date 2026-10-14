@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Caret · 五版短片</title>
+  <link rel="stylesheet" href="./play.css">
+</head>
+<body>
+  <div class="wb" id="wb">
+    <header class="wb-title">
+      <div class="wb-l">
+        <svg class="window-appicon" viewBox="-8 -8 16 16" aria-hidden="true">
+          <path d="M0 -7.2 L6.24 -3.6 L6.24 3.6 L0 7.2 L-6.24 3.6 L-6.24 -3.6 Z M0 0 L-6.24 -3.6 M0 0 L6.24 -3.6 M0 0 L0 7.2" />
+        </svg>
+        <nav><span>文件</span><span>编辑</span><span>选择</span><span>查看</span><span>转到</span><span>运行</span><span>终端</span><span>帮助</span></nav>
+      </div>
+      <div class="wb-c">开机动画 — Cursor</div>
+      <div></div>
+    </header>
+    <div class="wb-body">
+      <aside class="wb-act"><i class="on"></i><i></i><i></i></aside>
+      <main class="wb-ed">
+        <div class="tabs"><span class="on">caret.js</span></div>
+        <div class="code">
+          <div class="ln"><i>1</i><span class="cm">// 开机只占一个动作</span></div>
+          <div class="ln cur"><i>2</i><span class="kw">const</span> boot = <span class="fn">Caret</span>.<span class="fn">play</span>()<span id="liveCaret" class="caret"></span></div>
+        </div>
+      </main>
+    </div>
+    <footer class="wb-st"><span>main</span><span id="sb"></span><span>JavaScript</span></footer>
+  </div>
+
+  <div id="stage">
+    <section class="scene" data-id="shutter">
+      <div class="mark" id="sh-mark">
+        <div class="cube" data-cube></div>
+        <div class="word">CURSOR</div>
+        <div class="sub">开机动画</div>
+      </div>
+      <div class="blade top" id="sh-top"></div>
+      <div class="blade bot" id="sh-bot"></div>
+      <div class="solo" id="sh-caret"></div>
+    </section>
+
+    <section class="scene" data-id="strike">
+      <svg class="full" id="st-svg"></svg>
+      <div class="mark" id="st-mark">
+        <div class="cube" data-cube></div>
+        <div class="word">CURSOR</div>
+      </div>
+      <div class="flash" id="st-flash"></div>
+    </section>
+
+    <section class="scene" data-id="word">
+      <div class="line" id="w-line">
+        <span id="w-typed"></span><span class="ghost" id="w-ghost"></span><i class="solo inline" id="w-caret"></i>
+      </div>
+      <div class="kbd" id="w-tab">Tab</div>
+      <div class="mark late" id="w-mark">
+        <div class="cube" data-cube></div>
+        <div class="word">CURSOR</div>
+      </div>
+    </section>
+
+    <section class="scene" data-id="drop">
+      <div class="drop" id="d-drop">
+        <div class="cube" data-cube></div>
+        <div class="word side" id="d-word">CURSOR</div>
+      </div>
+    </section>
+
+    <section class="scene" data-id="flip">
+      <div class="pivot" id="f-pivot">
+        <div class="card">
+          <div class="face front"><i class="solo"></i></div>
+          <div class="face rear">
+            <div class="cube" data-cube></div>
+            <div class="word sm">CURSOR</div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <a class="back" href="../index.html">全部版本</a>
+  <aside class="dock" id="dock">
+    <div class="dock-title">CARET <em id="cutName">快门</em></div>
+    <div class="seg" id="cuts">
+      <button data-v="shutter">快门</button>
+      <button data-v="strike">一击</button>
+      <button data-v="word">一个词</button>
+      <button data-v="drop">落点</button>
+      <button data-v="flip">翻面</button>
+    </div>
+    <div class="tl">
+      <button id="btnPlay" class="icon" title="暂停">
+        <svg class="i-pause" viewBox="0 0 12 12"><rect x="2" y="1.5" width="2.6" height="9" rx=".6"/><rect x="7.4" y="1.5" width="2.6" height="9" rx=".6"/></svg>
+        <svg class="i-play" viewBox="0 0 12 12"><path d="M3 1.6v8.8L10.2 6z"/></svg>
+      </button>
+      <input id="scrub" type="range" min="0" max="1000" value="0" aria-label="时间轴">
+      <button id="btnReplay">重播</button>
+    </div>
+    <div class="meta"><span id="phase">—</span><span id="time">0.00</span></div>
+  </aside>
+  <script src="./play.js"></script>
+</body>
+</html>
